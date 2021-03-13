@@ -1,5 +1,3 @@
-export default function PostPage({ }) {
-  return (
-    <main></main>
-  )
+export default function PostPage({}) {
+  return <main></main>;
 }

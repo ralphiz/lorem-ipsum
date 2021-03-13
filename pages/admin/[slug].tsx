@@ -1,5 +1,3 @@
-export default function AdminPostEdit({ }) {
-  return (
-    <main></main>
-  )
+export default function AdminPostEdit({}) {
+  return <main></main>;
 }

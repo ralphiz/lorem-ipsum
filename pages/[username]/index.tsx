@@ -1,5 +1,3 @@
-export default function UserProfilePage({ }) {
-  return (
-    <main></main>
-  )
+export default function UserProfilePage({}) {
+  return <main></main>;
 }
