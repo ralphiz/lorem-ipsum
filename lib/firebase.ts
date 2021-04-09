@@ -46,8 +46,8 @@ export function postToJSON(doc: firebase.firestore.DocumentSnapshot) {
   return {
     ...data,
     // firestore timestamp NOT serializable to JSON
-    createdAt: data.createdAt.toMillis(),
-    updatedAt: data.updatedAt.toMillis(),
+    createdAt: data?.createdAt.toMillis() || 0,
+    updatedAt: data?.updatedAt.toMillis() || 0,
   };
 }
 
