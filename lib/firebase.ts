@@ -23,6 +23,8 @@ export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 export const firestore = firebase.firestore();
 export const storage = firebase.storage();
+export const fromMillis = firebase.firestore.Timestamp.fromMillis;
+export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
 
 // Helper functions
 
@@ -50,5 +52,3 @@ export function postToJSON(doc: firebase.firestore.DocumentSnapshot) {
     updatedAt: data?.updatedAt.toMillis() || 0,
   };
 }
-
-export const fromMillis = firebase.firestore.Timestamp.fromMillis;
