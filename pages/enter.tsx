@@ -2,12 +2,14 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "../lib/context";
 import debounce from "lodash.debounce";
 import { auth, firestore, googleAuthProvider } from "../lib/firebase";
+import MetaTags from "../components/Metatags";
 
 export default function EnterPage(props) {
   const { user, username } = useContext(UserContext);
 
   return (
     <main>
+      <MetaTags title="Enter" description="Sign up to write something!" />
       {user ? (
         !username ? (
           <UsernameForm />

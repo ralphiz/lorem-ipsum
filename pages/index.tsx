@@ -1,8 +1,9 @@
+import Link from "next/link";
 import { useState } from "react";
 import Loader from "../components/Loader";
+import MetaTags from "../components/Metatags";
 import PostFeed from "../components/PostFeed";
 import { firestore, fromMillis, postToJSON } from "../lib/firebase";
-import styles from "../styles/Home.module.css";
 
 // Max post to query per page
 const LIMIT = 1;
@@ -54,6 +55,33 @@ export default function Home(props) {
 
   return (
     <main>
+      <MetaTags
+        title="Home Page"
+        description="Get the latest posts on our site"
+      />
+
+      <div className="card card-info">
+        <h2>🤔 Lorem Ipsum</h2>
+        <p>
+          Welcome! This app is built with Next.js and Firebase and is loosely
+          inspired by <Link href="https://dev.to/">Dev.to</Link>.
+        </p>
+        <p>
+          Sign up for an 👨‍🎤 account, ✍️ write posts, then 💞 heart content
+          created by other users. All public content is server-rendered and
+          search-engine optimized.
+        </p>
+        <p>
+          Created following the{" "}
+          <Link href="https://fireship.io/courses/react-next-firebase/">
+            Next.js Firebase Course
+          </Link>{" "}
+          on <Link href="https://fireship.io/">Fireship.io</Link> by Jeff
+          Delaney (
+          <Link href="https://github.com/codediodeio">@codediodeio</Link>).
+        </p>
+      </div>
+
       <PostFeed posts={posts} admin={false} />
 
       {!loading && !postsEnd && (
