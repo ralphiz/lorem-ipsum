@@ -31,7 +31,7 @@ function PostManager() {
     .collection("users")
     .doc(uid)
     .collection("posts")
-    .doc(slug);
+    .doc(slug as string);
   const [post] = useDocumentDataOnce(postRef);
 
   return (
