@@ -60,7 +60,7 @@ service cloud.firestore {
         let heartDocExistsAfter = existsAfter(/databases/$(database)/documents/users/$(userId)/posts/$(postId)/hearts/$(currentUser));
         let heartDocExists = exists(/databases/$(database)/documents/users/$(userId)/posts/$(postId)/hearts/$(currentUser));
 
-        let heartDocAdded= !heartDocExists && heartDocExistsAfter;
+        let heartDocAdded = !heartDocExists && heartDocExistsAfter;
         let heartDocRemoved = heartDocExists && !heartDocExistsAfter;
 
 
