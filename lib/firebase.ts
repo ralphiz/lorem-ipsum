@@ -14,6 +14,7 @@ const firebaseConfig = {
 };
 
 // Make sure the app is only initialized once
+// NextJS will sometimes run this twice
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
