@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { FormEvent, useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "../lib/context";
 import debounce from "lodash.debounce";
 import { auth, firestore, googleAuthProvider } from "../lib/firebase";
@@ -83,24 +83,27 @@ function UsernameForm() {
     []
   );
 
-  // TODO: add error handling
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (e: FormEvent) => {
+    try {
+      e.preventDefault();
 
-    // Create refs for both documents
-    const userDoc = firestore.doc(`users/${user.uid}`);
-    const usernameDoc = firestore.doc(`usernames/${formValue}`);
+      // Create refs for both documents
+      const userDoc = firestore.doc(`users/${user.uid}`);
+      const usernameDoc = firestore.doc(`usernames/${formValue}`);
 
-    // Commit both docs together as a batch write
-    const batch = firestore.batch();
-    batch.set(userDoc, {
-      username: formValue,
-      photoURL: user.photoURL,
-      displayName: user.displayName,
-    });
-    batch.set(usernameDoc, { uid: user.uid });
+      // Commit both docs together as a batch write
+      const batch = firestore.batch();
+      batch.set(userDoc, {
+        username: formValue,
+        photoURL: user.photoURL,
+        displayName: user.displayName,
+      });
+      batch.set(usernameDoc, { uid: user.uid });
 
-    await batch.commit();
+      await batch.commit();
+    } catch (error) {
+      throw new Error("Error onSubmit: ", error);
+    }
   };
 
   return (
