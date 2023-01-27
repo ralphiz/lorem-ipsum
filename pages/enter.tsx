@@ -102,7 +102,7 @@ function UsernameForm() {
 
       await batch.commit();
     } catch (error) {
-      throw new Error("Error onSubmit: ", error);
+      throw new Error(`Error creating username: ${error}`);
     }
   };
 
