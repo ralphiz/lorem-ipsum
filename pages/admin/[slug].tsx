@@ -34,6 +34,24 @@ function PostManager() {
     .doc(slug as string);
   const [post] = useDocumentDataOnce(postRef);
 
+  const deletePost = () => {
+    postRef
+      .delete()
+      .then(() => router.push("/admin"))
+      .catch((err: Error) => {
+        throw new Error(err.message);
+        // Sentry.captureException(new Error(err));
+      })
+      .finally(() => toast.success("Post deleted successfully!"));
+  };
+
+  const confirmDelete = () => {
+    let confirm = window.confirm("Are you sure you want to delete this post?");
+    if (confirm) {
+      deletePost();
+    }
+  };
+
   return (
     <main className={styles.container}>
       {post && (
@@ -57,6 +75,9 @@ function PostManager() {
             <Link href={`/${post.username}/${post.slug}`}>
               <button className="btn-blue">Live view</button>
             </Link>
+            <button className="btn-red" onClick={confirmDelete}>
+              Delete
+            </button>
           </aside>
         </>
       )}
