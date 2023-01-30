@@ -28,6 +28,7 @@ function PostList() {
     .doc(auth.currentUser.uid)
     .collection("posts");
   const query = ref.orderBy("createdAt");
+  // There is also a useCollectionData hook that we can use to get the data straight away
   const [querySnapshot] = useCollection(query);
 
   const posts = querySnapshot?.docs.map((doc) => doc.data());

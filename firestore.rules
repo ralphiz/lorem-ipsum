@@ -2,13 +2,10 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /{document=**} {
-
-
       // Required for collection group queries
       match /posts/{postId} {
         allow read;
       }
-
 
       match /users/{userId} {
         allow read;
@@ -19,7 +16,6 @@ service cloud.firestore {
         allow read;
         allow create: if isValidUsername(username);
       }
-
 
       match /users/{userId}/posts/{postId} {
         allow read;
@@ -32,8 +28,6 @@ service cloud.firestore {
         allow read;
         allow write: if request.auth.uid == heartId;
       }
-
-
 
       function canCreatePost(userId) {
         let isOwner = request.auth.uid == userId;
@@ -60,17 +54,14 @@ service cloud.firestore {
         let heartDocExistsAfter = existsAfter(/databases/$(database)/documents/users/$(userId)/posts/$(postId)/hearts/$(currentUser));
         let heartDocExists = exists(/databases/$(database)/documents/users/$(userId)/posts/$(postId)/hearts/$(currentUser));
 
-        let heartDocAdded = !heartDocExists && heartDocExistsAfter;
+        let heartDocAdded= !heartDocExists && heartDocExistsAfter;
         let heartDocRemoved = heartDocExists && !heartDocExistsAfter;
-
 
         let countChange = request.resource.data.heartCount - resource.data.heartCount;
         let validChange = countChange == 1 || countChange == -1;
 
         return hasValidFields && validChange && ( countChange == 1 ? heartDocAdded : heartDocRemoved );
       }
-
-
 
       function isValidUser(userId) {
         let isOwner = request.auth.uid == userId;
